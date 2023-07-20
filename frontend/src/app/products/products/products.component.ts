@@ -9,11 +9,18 @@ import { Product } from '../product';
 })
 export class ProductsComponent implements OnInit {
   products!: Product[];
-  constructor(private productsService: ProductsService) {}
+  showCreateProduct: boolean;
+  constructor(private productsService: ProductsService) {
+    this.showCreateProduct = true;
+  }
 
   ngOnInit(): void {
     this.productsService
       .getProducts()
       .subscribe((data) => (this.products = data));
+  }
+
+  showCreateProductComponent() {
+    this.showCreateProduct = !this.showCreateProduct;
   }
 }

@@ -1,0 +1,73 @@
+<!-- Button trigger modal -->
+<span
+  type="button"
+  class="btn btn-primary create-product-span"
+  data-bs-toggle="modal"
+  data-bs-target="#createProductModal"
+>
+  +
+</span>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="createProductModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">create a new Product</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="createForm" (ngSubmit)="submit()">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              formControlName="title"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              formControlName="price"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="desc" class="form-label">desc</label>
+            <textarea
+              class="form-control"
+              id="desc"
+              rows="3"
+              formControlName="description"
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Create</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
