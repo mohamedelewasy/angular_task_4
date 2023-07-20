@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <div *ngFor="let product of products" class="card">
+    <div class="card-body">
+      <!-- <h3 class="d-none">{{ product.id }}</h3> -->
+      <h4 class="card-title">{{ product.title }}</h4>
+      <p class="card-text">{{ product.price }}</p>
+      <button
+        type="button"
+        class="btn btn-primary"
+        routerLink="{{ product.id }}"
+      >
+        Details
+      </button>
+    </div>
+  </div>
+</div>

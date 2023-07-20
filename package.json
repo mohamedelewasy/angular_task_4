@@ -1,0 +1,7 @@
+{
+  "name": "authentications",
+  "scripts": {
+    "start:api": "cd api && npm start",
+    "start:front": "cd frontend && npm start"
+  }
+}
