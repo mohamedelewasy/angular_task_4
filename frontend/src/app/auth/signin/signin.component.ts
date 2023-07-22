@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
@@ -10,11 +10,15 @@ import { Router } from '@angular/router';
 })
 export class SigninComponent {
   signinForm!: FormGroup;
+  username!: FormControl;
+  password!: FormControl;
   constructor(private authService: AuthService, private router: Router) {
     if (authService.isLoggedIn()) router.navigate(['/']);
+    this.username = new FormControl('', Validators.required);
+    this.password = new FormControl('', Validators.required);
     this.signinForm = new FormGroup({
-      username: new FormControl<string>(''),
-      password: new FormControl<string>(''),
+      username: this.username,
+      password: this.password,
     });
   }
 

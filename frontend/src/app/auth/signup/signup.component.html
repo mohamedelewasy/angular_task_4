@@ -8,21 +8,70 @@
     <label for="username" class="form-label">Username</label>
     <input
       type="text"
+      [ngClass]="{ 'formcontrol-error': username.dirty && username.errors }"
       class="form-control"
       id="username"
-      formControlName="username"
+      [formControl]="username"
       autocomplete="username"
     />
+    <small
+      *ngIf="
+        username.dirty && username.errors && $any(username.errors).required
+      "
+      class="text-danger"
+      >username is required</small
+    >
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
     <input
       type="password"
+      [ngClass]="{ 'formcontrol-error': password.dirty && password.errors }"
       class="form-control"
       id="password"
-      formControlName="password"
+      [formControl]="password"
       autocomplete="new-password"
     />
+    <small
+      *ngIf="
+        password.dirty && password.errors && $any(password.errors).required
+      "
+      class="text-danger"
+      >password is required</small
+    >
   </div>
-  <button type="submit" class="btn btn-primary">Sign Up</button>
+  <div class="mb-3">
+    <label for="passwordConfirm" class="form-label">passwordConfirm</label>
+    <input
+      type="passwordConfirm"
+      [ngClass]="{
+        'formcontrol-error': passwordConfirm.dirty && passwordConfirm.errors
+      }"
+      class="form-control"
+      id="passwordConfirm"
+      [formControl]="passwordConfirm"
+      autocomplete="new-password"
+    />
+    <small
+      *ngIf="
+        passwordConfirm.dirty &&
+        passwordConfirm.errors &&
+        $any(passwordConfirm.errors).required
+      "
+      class="text-danger"
+      >password is required</small
+    >
+    <small
+      *ngIf="
+        passwordConfirm.dirty &&
+        passwordConfirm.errors &&
+        $any(passwordConfirm.errors).wrong
+      "
+      class="text-danger"
+      >password not equal password confirm</small
+    >
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">
+    Sign Up
+  </button>
 </form>
