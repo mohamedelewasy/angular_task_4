@@ -3,6 +3,8 @@ import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductsService } from '../products.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../product';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-update-product',
@@ -19,7 +21,9 @@ export class UpdateProductComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {
     this.title = new FormControl('', Validators.required);
     this.price = new FormControl('', [
@@ -47,18 +51,37 @@ export class UpdateProductComponent implements OnInit {
   }
 
   submit() {
+    this.spinner.show();
     const { title, price, description } = this.updateForm.value;
     this.productsService
       .updateProduct(this.productId, title, price, description)
-      .subscribe();
-    this.router.navigate([`/products/${this.productId}`], {
-      onSameUrlNavigation: 'reload',
-    });
+      .subscribe(
+        () => {
+          this.spinner.hide();
+          this.toastr.success('product updated.');
+          this.router.navigate([`/products/${this.productId}`], {
+            onSameUrlNavigation: 'reload',
+          });
+        },
+        (err) => {
+          this.spinner.hide();
+          this.toastr.error(err.error.message, undefined, { timeOut: 5000 });
+        }
+      );
   }
 
   deleteProduct() {
-    this.productsService.deleteProduct(this.productId).subscribe(() => {
-      this.router.navigate(['/']);
-    });
+    this.spinner.show();
+    this.productsService.deleteProduct(this.productId).subscribe(
+      () => {
+        this.spinner.hide();
+        this.toastr.success('product deleted.');
+        this.router.navigate(['/']);
+      },
+      (err) => {
+        this.spinner.hide();
+        this.toastr.error(err.error.message, undefined, { timeOut: 5000 });
+      }
+    );
   }
 }

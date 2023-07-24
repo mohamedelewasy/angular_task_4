@@ -8,7 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -19,6 +22,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProductsModule,
     SharedModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({ closeButton: true, progressBar: true }),
+    NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }),
   ],
   providers: [],
   bootstrap: [AppComponent],

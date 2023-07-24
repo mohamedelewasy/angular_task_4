@@ -4,6 +4,9 @@
   class="col-4 d-flex flex-column justify-content-center"
 >
   <h3 class="text-center text-capitalize mb-5">sign up with a new account</h3>
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
   <div class="mb-3">
     <label for="username" class="form-label">Username</label>
     <input

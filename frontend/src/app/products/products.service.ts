@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
 import { environment as env } from 'src/environments/environment.development';
-import { ErrorHandlerService } from '../shared/http/error-handler.service';
 import { Product } from './product';
 import { AuthService } from '../auth/auth.service';
 
@@ -12,41 +11,34 @@ import { AuthService } from '../auth/auth.service';
 export class ProductsService {
   constructor(
     private httpClient: HttpClient,
-    private errorHandler: ErrorHandlerService,
     private authService: AuthService
   ) {}
 
   getProducts(): Observable<Product[]> {
-    return this.httpClient
-      .get<Product[]>(env.api + '/products')
-      .pipe(catchError(this.errorHandler.logError));
+    return this.httpClient.get<Product[]>(env.api + '/products');
   }
 
   getProduct(id: number): Observable<Product> {
-    return this.httpClient
-      .get<Product>(env.api + `/products/${id}`)
-      .pipe(catchError(this.errorHandler.logError));
+    return this.httpClient.get<Product>(env.api + `/products/${id}`);
   }
 
   createProduct(title: string, price: number, description: string) {
-    return this.httpClient
-      .post(env.api + '/products', {
-        title,
-        price,
-        description,
-      })
-      .pipe(catchError(this.errorHandler.logError));
+    return this.httpClient.post(env.api + '/products', {
+      title,
+      price,
+      description,
+    });
   }
 
   updateProduct(id: number, title: string, price: number, description: string) {
-    return this.httpClient
-      .patch(env.api + `/products/${id}`, { title, price, description })
-      .pipe(catchError(this.errorHandler.logError));
+    return this.httpClient.patch(env.api + `/products/${id}`, {
+      title,
+      price,
+      description,
+    });
   }
 
   deleteProduct(id: number) {
-    return this.httpClient
-      .delete(env.api + `/products/${id}`)
-      .pipe(catchError(this.errorHandler.logError));
+    return this.httpClient.delete(env.api + `/products/${id}`);
   }
 }

@@ -10,6 +10,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../shared/http/token.interceptor';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { RouteReuseStrategy } from '@angular/router';
+import { provideToastr } from 'ngx-toastr';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { RouteReuseStrategy } from '@angular/router';
     ReactiveFormsModule,
   ],
   providers: [
+    provideAnimations(),
+    provideToastr(),
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
 })
