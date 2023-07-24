@@ -29,6 +29,8 @@ class Product {
     if (index < 0) throw new Error("product not found");
     if (product.title) this.products[index].title = product.title;
     if (product.price) this.products[index].price = product.price;
+    if (product.description)
+      this.products[index].description = product.description;
   }
 
   delete(id: number): void {

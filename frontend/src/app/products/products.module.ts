@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../shared/http/token.interceptor';
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { RouteReuseStrategy } from '@angular/router';
 
 @NgModule({
   declarations: [

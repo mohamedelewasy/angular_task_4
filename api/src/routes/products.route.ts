@@ -24,7 +24,7 @@ router
   })
   .patch(verifyJwt, (req, res) => {
     Products.udpated({ id: +req.params.id, ...req.body });
-    res.sendStatus(200);
+    res.status(200).json();
   })
   .delete(verifyJwt, (req, res) => {
     Products.delete(+req.params.id);

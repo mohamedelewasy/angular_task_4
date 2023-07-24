@@ -8,7 +8,7 @@ export const verifyJwt: RequestHandler = (req, res, next) => {
   try {
     const payload = verify(token, "secret") as { username: string };
     const user = Users.findByUsername(payload.username);
-    if (!user) throw new Error("not allowed");
+    if (!user) throw new Error("not authorized");
     res.locals.username = user.username;
   } catch (error) {
     throw new Error("bad token");
